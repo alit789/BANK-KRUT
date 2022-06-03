@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <string.h>
+
+float Tarik(float Saldo) {
+    float withdraw;
+    bool back = true;
+
+    printf("Kamu Memilih Untuk Menarik Sejumlah Uang\n");
+    printf("Saldo Di Rekening Anda Saat Ini adalah Rp.%.2f \n",Saldo);
+    
+
+    while (back) {
+    printf("Masukan Jumlah Nominal Yang Ingin Di Tarik >> ");
+    scanf("%f", &withdraw);
+
+
+    if (withdraw < Saldo) {
+        back = false;
+        Saldo -= withdraw;
+        printf("\nKamu Menarik Uang Sebesar :Rp.%.2f\n", withdraw);
+        printf("Saldomu Saat Ini adalah :Rp.%.2f\n\n", Saldo);
+
+    }
+
+        else  {
+
+        printf("+++Kamu Tidak Memiliki Cukup Uang+++\n");
+        printf("Silahkan Hubungi Pihak Bank Untuk info Lebih Lanjut\n");
+        printf("Saldomu Saat Ini adalah:  Rp.%.2f\n\n", Saldo);
+        break;
+        }
+    }
+    return Saldo;
+
+
+}
