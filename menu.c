@@ -8,7 +8,8 @@ int Menu() {
     printf("< 2 >  Tabung\n");
     printf("< 3 >  Tarik\n");
     printf("< 4 >  Beli Pulsa dan Paket Data\n");
-    printf("< 5 >  Exit\n\n");
+    printf("< 5 >  Bayar BPJS\n");
+    printf("< 6 >  Exit\n\n");
     return 6;
 
 }
