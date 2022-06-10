@@ -25,7 +25,8 @@ int Menu() {
     printf("< 3 >  Tarik\n");
     printf("< 4 >  Beli Pulsa dan Paket Data\n");
     printf("< 5 >  Bayar BPJS\n");
-    printf("< 6 >  Exit\n\n");
+    printf("< 6 >  Bayar UKT\n");
+    printf("< 7 >  Exit\n\n");
     return 6;
 
 }
@@ -59,7 +60,7 @@ float Depo(float Saldo) {
 
 
 
-int Eror() 
+int Eror()
 {
     printf("Kamu Salah Memilih Nomor\n");
     return 9;
@@ -74,22 +75,22 @@ int MenuKeluar() {
 }
 
 float BPJS(float Saldo){
-	char KTP[16]; 
+	char KTP[16];
 	char Nama[100];
 	const float Bayar = 42000.00;
-	
+
 	printf("Menu Pembayaran BPJS \n\n");
 	printf("Masukkan No KTP : "); fflush(stdin); gets(KTP);
 	printf("Masukkan Nama : "); fflush(stdin); gets(Nama);
-	
+
 	printf("\nTotal Pembayaran Sebesar : Rp.%.f \n" , Bayar);
 	printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
-	
+
 	int pilihan;
-	printf("<1.ya/2.tidak> : "); 
-    fflush(stdin); 
+	printf("<1.ya/2.tidak> : ");
+    fflush(stdin);
     scanf("%d" , &pilihan);
-	
+
 
     if(pilihan == 1){
         Saldo = Saldo - Bayar;
@@ -106,7 +107,7 @@ float Tarik(float Saldo) {
 
     printf("Kamu Memilih Untuk Menarik Sejumlah Uang\n");
     printf("Saldo Di Rekening Anda Saat Ini adalah Rp.%.2f \n",Saldo);
-    
+
 
     while (back) {
     printf("Masukan Jumlah Nominal Yang Ingin Di Tarik >> ");
@@ -151,7 +152,7 @@ float nominal_paket(float Saldo){
                         getchar();
                         scanf("%c",&yakin);
                         if(yakin == 'y' || yakin == 'Y'){
-                            Saldo -= 40000;   
+                            Saldo -= 40000;
                         }
                         printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                             break;
@@ -162,7 +163,7 @@ float nominal_paket(float Saldo){
                         getchar();
                         scanf("%c",&yakin);
                         if(yakin == 'y' || yakin == 'Y'){
-                            Saldo -= 20000;   
+                            Saldo -= 20000;
                         }
                         printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                             break;
@@ -173,7 +174,7 @@ float nominal_paket(float Saldo){
                         getchar();
                         scanf("%c",&yakin);
                         if(yakin == 'y' || yakin == 'Y'){
-                            Saldo -= 10000;   
+                            Saldo -= 10000;
                         }
                         printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                             break;
@@ -184,7 +185,7 @@ float nominal_paket(float Saldo){
                         getchar();
                         scanf("%c",&yakin);
                         if(yakin == 'y' || yakin == 'Y'){
-                            Saldo -= 20000;   
+                            Saldo -= 20000;
                         }
                         printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                             break;
@@ -211,7 +212,7 @@ float nominal_pulsa(float Saldo){
                 getchar();
                 scanf("%c",&yakin);
                 if(yakin == 'y' || yakin == 'Y'){
-                    Saldo -= 10000;   
+                    Saldo -= 10000;
                 }
                 printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                 break;
@@ -224,7 +225,7 @@ float nominal_pulsa(float Saldo){
                 getchar();
                 scanf("%c",&yakin);
                 if(yakin == 'y' || yakin == 'Y'){
-                    Saldo -= 15000;   
+                    Saldo -= 15000;
                 }
                 printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                 break;
@@ -238,7 +239,7 @@ float nominal_pulsa(float Saldo){
                 getchar();
                 scanf("%c",&yakin);
                 if(yakin == 'y' || yakin == 'Y'){
-                    Saldo -= 20000;   
+                    Saldo -= 20000;
                 }
                 printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                 break;
@@ -251,7 +252,7 @@ float nominal_pulsa(float Saldo){
                 getchar();
                 scanf("%c",&yakin);
                 if(yakin == 'y' || yakin == 'Y'){
-                    Saldo -= 50000;   
+                    Saldo -= 50000;
                 }
                 printf("Sisa Saldo Anda Adalah : Rp.%.2f \n",Saldo);
                 break;
@@ -259,9 +260,17 @@ float nominal_pulsa(float Saldo){
             system("cls");
             return Saldo;
 }
-
-int main() 
+struct Data
 {
+    char Nama[50];
+	char NIM[10];
+};
+
+int main()
+{
+    int jumlah = 1;
+    int level;
+    int pilihan;
     FILE*DataUser;
     int pilih;
     int pilihpulsa;
@@ -285,14 +294,14 @@ int main()
     if ((DataUser = fopen("DataAkun.txt","r")) == NULL){
       printf("Tidak ada Akun Yang Terdaftar\n");
       printf("Harap Daftar Terlebih Dahulu\n");
-     
+
       exit(1);
     }
 
     fscanf(DataUser,"%s",user);
     printf("Masukan Username >> ");
     scanf("%s",&username);
-    
+
     if (strcmp(user,username)==0)
     {
         printf("Selamat Datang %s\n",user);
@@ -320,10 +329,11 @@ int main()
     printf("Masukan Pilihan MU >> \t");
     scanf("%d", &option);
 
+    struct Data Mahasiswa[jumlah];
 
-        switch (option) {
+    switch(option){
             case 1:
-            	
+
                 CekSaldo(Saldo);
                 system("pause");
                 system("CLS");
@@ -334,14 +344,14 @@ int main()
                 system("CLS");
                 break;
             case 3:
-            
+
                 Saldo = Tarik(Saldo);
                 system("pause");
                 system("CLS");
                 break;
 
             case 4:
-            	
+
                     printf("Kamu Memilih Menu Untuk Membeli Pulsa Atau Paket Data\n");
                     printf("Masukan Pilihan Yang Ingin Di Pilih :\n");
                     printf("1.Pulsa\n2.Paket Data\n");
@@ -381,22 +391,111 @@ int main()
 
                 Saldo = BPJS(Saldo);
                 system("pause");
-                system("cls");    
+                system("cls");
                 break;
 
 
             case 6:
 
-                system("CLS");
-                MenuKeluar();
-                return 0;
+                    printf("Menu Pembayaran UKT \n\n");
+                    printf("Masukkan Nama : "); fflush(stdin);
+                    gets(Mahasiswa[jumlah].Nama);
+                    printf("Masukkan NIM : "); fflush(stdin);
+                    gets(Mahasiswa[jumlah].NIM);
+                    printf("Pilih Level UKT : \n1.Rp.500.000 \n2.Rp.1.000.000 \n3.Rp.5.000.000 \n4.Rp.7.000.000 \n5.Rp.8.000.000\n");
+                    printf("Masukkan Pilihan :");
+                    scanf("%d", &level);
+                    switch (level){
+                        case 1:
+                            printf("Nama    : %s\n",Mahasiswa[jumlah].Nama);
+                            printf("Nim     : %s\n",Mahasiswa[jumlah].NIM);
+                            printf("UKT Anda Sebesar Rp.500.000\n");
+                            if(Saldo<500000){
+                                printf("Saldo Anda Tidak Cukup\n");
+                                printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
+                                system("pause");
+                                break;
+                                system("cls");
+                            }
+                            printf("<1.ya/2.tidak> : "); fflush(stdin);
+                            scanf("%d" , &pilihan);
+                            pilihan == 1  ? Saldo = Saldo - 500000 : printf("Keluar....\n\n");
+                            break;
+                        case 2:
+                            printf("Nama    : %s\n",Mahasiswa[jumlah].Nama);
+                            printf("Nim     : %s\n",Mahasiswa[jumlah].NIM);
+                            printf("UKT Anda Sebesar Rp.1.000.000\n");
+                            if(Saldo<1000000){
+                                printf("Saldo Anda Tidak Cukup\n");
+                                printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
+                                system("pause");
+                                break;
+                                system("cls");
+                            }
+                            printf("<1.ya/2.tidak> : "); fflush(stdin);
+                            scanf("%d" , &pilihan);
+                            pilihan == 1  ? Saldo = Saldo - 1000000 : printf("Keluar....\n\n");
+                            break;
+                        case 3:
+                            printf("Nama    : %s\n",Mahasiswa[jumlah].Nama);
+                            printf("Nim     : %s\n",Mahasiswa[jumlah].NIM);
+                            printf("UKT Anda Sebesar Rp.5.000.000\n");
+                            if(Saldo<5000000){
+                                printf("Saldo Anda Tidak Cukup\n");
+                                printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
+                                system("pause");
+                                break;
+                                system("cls");
+                            }
+                            printf("<1.ya/2.tidak> : "); fflush(stdin);
+                            scanf("%d" , &pilihan);
+                            pilihan == 1  ? Saldo = Saldo - 5000000 : printf("Keluar....\n\n");
+                            break;
+                        case 4:
+                            printf("Nama    : %s\n",Mahasiswa[jumlah].Nama);
+                            printf("Nim     : %s\n",Mahasiswa[jumlah].NIM);
+                            printf("UKT Anda Sebesar Rp.7.000.000\n");
+                            if(Saldo<7000000){
+                                printf("Saldo Anda Tidak Cukup\n");
+                                printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
+                                system("pause");
+                                break;
+                                system("cls");
+                            }
+                            printf("<1.ya/2.tidak> : "); fflush(stdin);
+                            scanf("%d" , &pilihan);
+                            pilihan == 1  ? Saldo = Saldo - 7000000 : 
+                            printf("Keluar....\n\n");
+                            break;
+                        case 5:
+                            printf("Nama    : %s\n",Mahasiswa[jumlah].Nama);
+                            printf("Nim     : %s\n",Mahasiswa[jumlah].NIM);
+                            printf("UKT Anda Sebesar Rp.8.000.000\n");
+                            if(Saldo<8000000){
+                                printf("Saldo Anda Tidak Cukup\n");
+                                printf("Sisa Saldo di rekening anda saat ini : Rp. %.2f\n" , Saldo);
+                                system("pause");
+                                break;
+                                system("cls");
+                            }
+                            printf("<1.ya/2.tidak> : "); fflush(stdin);
+                            scanf("%d" , &pilihan);
+                            pilihan == 1  ? Saldo = Saldo - 8000000 : printf("Keluar....\n\n");
+                            break;
+                        default :
+                            break;
+                        }
                 break;
-
+            case 7:
+                MenuKeluar();
+                exit(0);
+                break;
             default:
                 Eror();
+                exit(0);
                 break;
-    
 
+        }
         printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
         printf("Apakah Kamu Ingin Melakukan Transaksi yang lain ?\n");
         printf("1 > Iya\n");
@@ -416,7 +515,5 @@ int main()
 
     }
 
-
-    }
     return 0;
 }
